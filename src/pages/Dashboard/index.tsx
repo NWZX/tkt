@@ -1,17 +1,17 @@
 import { Flex, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import TkLayout from 'src/components/TkLayout';
-import { IBusiness } from 'src/interface/Interfaces';
-import { dataFetch } from 'src/utils/dataFetch';
-import useSWR from 'swr';
+import TkLayout from 'components/TkLayout';
+import { IBusiness } from 'interface/Interfaces';
+import { Helmet } from 'react-helmet';
 import BusinessFilter from './BusinessFilter';
-import BusinessTable from './BusinessTable';
-import BusinessTableElement from './BusinessTableElement';
+import BusinessList from './BusinessList';
+import BusinessListElement from './BusinessListElement';
+import { useBusinessContext } from 'interface/DataContext';
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-    const { data } = useSWR<IBusiness[]>('https://test.wertkt.com/api/biz/', dataFetch);
+    const { data } = useBusinessContext();
     const [companyTag, setCompanyTag] = useState<string[]>([]);
     const [sectorTag, setSectorTag] = useState<string[]>([]);
     const [filteredData, setFilteredData] = useState<IBusiness[]>([]);
@@ -45,21 +45,29 @@ const Dashboard: React.FC<Props> = () => {
     };
 
     return (
-        <TkLayout>
-            <Flex direction={'column'} gap={'3rem'}>
-                <Heading as="h2">Welcome on TKT Dashboard</Heading>
-                <BusinessFilter
-                    sectors={sectorTag}
-                    companies={companyTag}
-                    onChange={handleFilterChange}
-                ></BusinessFilter>
-                <BusinessTable>
-                    {filteredData.slice(0, 5).map((v) => {
-                        return <BusinessTableElement key={v.id} {...v} />;
-                    })}
-                </BusinessTable>
-            </Flex>
-        </TkLayout>
+        <>
+            <Helmet>
+                <title>Dashboard TKT</title>
+                <link rel="canonical" href="http://localhost" />
+            </Helmet>
+            <TkLayout>
+                <Flex direction={'column'} gap={'3rem'}>
+                    <Heading as="h2" size={['md', 'md', 'lg']}>
+                        Welcome on TKT Dashboard!
+                    </Heading>
+                    <BusinessFilter
+                        sectors={sectorTag}
+                        companies={companyTag}
+                        onChange={handleFilterChange}
+                    ></BusinessFilter>
+                    <BusinessList>
+                        {filteredData.slice(0, 5).map((v) => {
+                            return <BusinessListElement key={v.id} {...v} />;
+                        })}
+                    </BusinessList>
+                </Flex>
+            </TkLayout>
+        </>
     );
 };
 

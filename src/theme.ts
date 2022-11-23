@@ -1,5 +1,9 @@
 import { extendTheme } from '@chakra-ui/react';
 const customTheme = extendTheme({
+    fonts: {
+        heading: `'AvenirR', sans-serif`,
+        body: `'AvenirR', sans-serif`,
+    },
     colors: {
         transparent: 'transparent',
         black: '#000',

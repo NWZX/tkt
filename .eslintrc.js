@@ -30,6 +30,7 @@ module.exports = {
         // Why would you want unused vars?
         '@typescript-eslint/no-unused-vars': ['error'],
 
+        "react/prop-types": ["off"],
         '@typescript-eslint/no-empty-interface': 'off',
 
         // I suggest this setting for requiring return types on functions only where useful

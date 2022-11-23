@@ -11,10 +11,11 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
     const [sector, setSector] = React.useState('');
     const [company, setCompany] = React.useState('');
     return (
-        <Flex direction={'row'} gap={'2%'}>
+        <Flex direction={['column', 'row']} gap={'1rem'}>
             <Select
-                placeholder="Sector"
-                w={'30%'}
+                placeholder="Sector *"
+                required
+                w={['100%', '100%', '30%']}
                 onChange={(e) => {
                     e.target.value && setSector(e.target.value);
                     onChange && onChange(e.target.value, company);
@@ -27,8 +28,9 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
                 ))}
             </Select>
             <Select
-                placeholder="Company"
-                w={'30%'}
+                placeholder="Company *"
+                required
+                w={['100%', '100%', '30%']}
                 onChange={(e) => {
                     e.target.value && setCompany(e.target.value);
                     onChange && onChange(sector, e.target.value);
