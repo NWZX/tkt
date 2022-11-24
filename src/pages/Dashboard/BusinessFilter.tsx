@@ -1,4 +1,5 @@
-import { Flex, Select } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import TkSelect from 'components/TkSelect';
 import React from 'react';
 
 interface Props {
@@ -12,9 +13,9 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
     const [company, setCompany] = React.useState('');
     return (
         <Flex direction={['column', 'row']} gap={'1rem'}>
-            <Select
+            <TkSelect
                 placeholder="Sector *"
-                required
+                isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {
                     e.target.value && setSector(e.target.value);
@@ -26,10 +27,10 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
                         {sector}
                     </option>
                 ))}
-            </Select>
-            <Select
+            </TkSelect>
+            <TkSelect
                 placeholder="Company *"
-                required
+                isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {
                     e.target.value && setCompany(e.target.value);
@@ -41,7 +42,7 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
                         {company}
                     </option>
                 ))}
-            </Select>
+            </TkSelect>
         </Flex>
     );
 };

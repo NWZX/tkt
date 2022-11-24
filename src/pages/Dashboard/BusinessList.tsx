@@ -9,7 +9,7 @@ const BusinessList: React.FC<Props> = ({ children }) => {
     return (
         <Box>
             <Box>
-                <Flex w={['100%']} h={'2.5rem'} justifyContent={'space-between'}>
+                <Flex w={['100%']} h={'2.5rem'} justifyContent={'space-between'} color={'grey.main'}>
                     <Text w={'33%'}>COMPANY</Text>
                     <Text w={'33%'}>N° SIREN</Text>
                     <Text w={'33%'}>CATEGORY</Text>

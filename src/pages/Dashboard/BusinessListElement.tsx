@@ -21,7 +21,10 @@ const BusinessListElement: React.FC<Props> = ({ id, name, siren, sector }) => {
                 h={'5rem'}
                 bgColor={'transparent'}
                 justifyContent={'space-between'}
-                border={'1px solid #D6D6D6'}
+                borderWidth={'1px'}
+                borderStyle={'solid'}
+                borderColor={'grey.light'}
+                _hover={{ bgColor: 'grey.light', borderColor: 'blue.main' }}
             >
                 <Text as={'span'} w={'33%'} textAlign={'left'} whiteSpace={'pre-wrap'}>
                     {name.toUpperCase()}
@@ -30,7 +33,7 @@ const BusinessListElement: React.FC<Props> = ({ id, name, siren, sector }) => {
                     {siren}
                 </Text>
                 <Text as={'span'} w={'33%'} textAlign={['center', 'left']}>
-                    <Tag size={'lg'} bgColor={'#4E59FF'} color={'white'}>
+                    <Tag size={'lg'} bgColor={'blue.main'} color={'white'} borderRadius={'3px'}>
                         {sector}
                     </Tag>
                 </Text>

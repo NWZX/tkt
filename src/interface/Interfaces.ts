@@ -4,14 +4,32 @@ export interface ApiResponse<T = unknown> {
 }
 
 export interface IBusiness {
+    /**
+     * The business ID.
+     */
     id: number;
+    /**
+     * The business name.
+     */
     name: string;
+    /**
+     * The business sector of activity.
+     */
     sector: string;
+    /**
+     * The business SIREN number.
+     */
     siren: number;
+    /**
+     * The business associated result.
+     */
     results: number[];
 }
 
 export interface IResult {
+    /**
+     * The result ID.
+     */
     id: number;
     ca: number;
     margin: number;

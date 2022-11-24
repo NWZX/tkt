@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, ListItem, Spinner } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import TkLayout from 'components/TkLayout';
 import { IBusiness } from 'interface/Interfaces';
@@ -6,12 +6,12 @@ import { Helmet } from 'react-helmet';
 import BusinessFilter from './BusinessFilter';
 import BusinessList from './BusinessList';
 import BusinessListElement from './BusinessListElement';
-import { useBusinessContext } from 'interface/DataContext';
+import { GetAllBusiness } from 'context/DataContext';
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-    const { data } = useBusinessContext();
+    const { data, isLoading } = GetAllBusiness();
     const [companyTag, setCompanyTag] = useState<string[]>([]);
     const [sectorTag, setSectorTag] = useState<string[]>([]);
     const [filteredData, setFilteredData] = useState<IBusiness[]>([]);
@@ -35,19 +35,19 @@ const Dashboard: React.FC<Props> = () => {
 
     const handleFilterChange = (sector: string, company: string): void => {
         if (data) {
-            const filteredData = data.filter(
+            const result = data.filter(
                 (business) =>
                     (sector ? business.sector === sector : true) && (company ? business.name === company : true),
             );
 
-            setFilteredData(filteredData.filter((v, i, a) => a.findIndex((v2) => v2.siren === v.siren) === i));
+            setFilteredData(result.filter((v, i, a) => a.findIndex((v2) => v2.siren === v.siren) === i));
         }
     };
 
     return (
         <>
             <Helmet>
-                <title>Dashboard TKT</title>
+                <title>TKT Dashboard</title>
                 <link rel="canonical" href="http://localhost" />
             </Helmet>
             <TkLayout>
@@ -61,9 +61,15 @@ const Dashboard: React.FC<Props> = () => {
                         onChange={handleFilterChange}
                     ></BusinessFilter>
                     <BusinessList>
-                        {filteredData.slice(0, 5).map((v) => {
-                            return <BusinessListElement key={v.id} {...v} />;
-                        })}
+                        {isLoading ? (
+                            <ListItem textAlign={'center'}>
+                                <Spinner color="blue.main" />
+                            </ListItem>
+                        ) : (
+                            filteredData.slice(0, 5).map((v) => {
+                                return <BusinessListElement key={v.id} {...v} />;
+                            })
+                        )}
                     </BusinessList>
                 </Flex>
             </TkLayout>

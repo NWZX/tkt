@@ -11,7 +11,7 @@ const TkMenuButton: React.FC<Props> = ({ ...props }) => {
             justifyContent="left"
             h={'4.5rem'}
             bgColor={'transparent'}
-            _hover={{ bgColor: '#E8E9FA', color: '#4E59FF' }}
+            _hover={{ bgColor: 'blue.light', color: 'blue.main' }}
             className="tk-menu-button"
         ></Button>
     );

@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
 import { dataFetch } from 'utils/dataFetch';
-import { IBusiness, IResult } from './Interfaces';
+import { IBusiness, IResult } from 'interface/Interfaces';
 
 interface IDataContext {
     apiRoute?: string;
@@ -60,26 +60,26 @@ export const DataContextProvider = ({
     );
 };
 
-type TBusinessContext = { data?: IBusiness[]; isLoading?: boolean; error?: Error };
+type TGetAllBusiness = { data: IBusiness[]; isLoading?: boolean; error?: Error };
 /**
  * Public Entry Point to Fetch Business Data
  * @param id id of the user to fetch
  * @returns {TUserContext}
  */
-export const useBusinessContext = (id?: number): TBusinessContext => {
+export const GetAllBusiness = (refresh = true): TGetAllBusiness => {
     const [context, dispatch] = useContext(DataContext);
-    const [business, setBusiness] = React.useState<IBusiness[]>();
+    const [business, setBusiness] = React.useState<IBusiness[]>([]);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [error, setError] = React.useState<Error | undefined>();
 
     useEffect(() => {
-        if (context.business && context.business.timestamp - Date.now() < 60000) {
+        if (context.business && (Date.now() - context.business.timestamp < 60000 || !refresh)) {
             setBusiness(context.business.data);
         } else if (!isLoading && !error) {
             setIsLoading(true);
             (async () => {
                 try {
-                    const remoteBusiness = await dataFetch<IBusiness[]>(context.apiRoute + `/biz/${id || ''}`);
+                    const remoteBusiness = await dataFetch<IBusiness[]>(context.apiRoute + `/biz/`);
 
                     setIsLoading(false);
                     dispatch('business', {
@@ -91,38 +91,59 @@ export const useBusinessContext = (id?: number): TBusinessContext => {
                 }
             })();
         }
-    }, [context.apiRoute, context.business, dispatch, error, id, isLoading]);
+    }, [context.apiRoute, context.business, dispatch, error, isLoading, refresh]);
 
-    if (id) {
-        const hasBusiness = business?.find((b) => b.id === id);
-        if (hasBusiness) {
-            return { data: [hasBusiness], isLoading, error };
-        } else return { data: undefined, isLoading, error: new Error(`Business with id ${id} not found in the data`) };
-    } else {
-        return { data: business, isLoading, error };
-    }
+    return { data: business, isLoading, error };
 };
 
-type TResultContext = { data?: IResult[]; isLoading?: boolean; error?: Error };
+type TBusinessById = { data?: IBusiness; isLoading?: boolean; error?: Error };
+export const GetBusinessById = (id?: number): TBusinessById => {
+    const [business, setBusiness] = React.useState<IBusiness>();
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState<Error>();
+
+    const { data, error: allError, isLoading: allIsLoading } = GetAllBusiness(false);
+
+    useEffect(() => {
+        if (id && data && !allIsLoading && !allError) {
+            const foundBusiness = data.find((b) => b.id === id);
+            if (foundBusiness) {
+                setBusiness(foundBusiness);
+            } else {
+                setError(new Error('Business not found'));
+            }
+            setIsLoading(false);
+        } else if (allIsLoading) {
+            setIsLoading(true);
+        } else if (allError) {
+            setError(allError);
+            setIsLoading(false);
+        }
+    }, [id, data, allIsLoading, allError]);
+
+    return { data: business, isLoading, error };
+};
+
+type TResultContext = { data: IResult[]; isLoading?: boolean; error?: Error };
 /**
  * Public Entry Point to Fetch Business Result Data
  * @param id id of the user to fetch
  * @returns {TUserContext}
  */
-export const useResultContext = (id?: number): TResultContext => {
+export const GetAllResultByIds = (ids?: number[]): TResultContext => {
     const [context, dispatch] = useContext(DataContext);
-    const [result, setResult] = React.useState<IResult[]>();
+    const [result, setResult] = React.useState<IResult[]>([]);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [error, setError] = React.useState<Error | undefined>();
 
     useEffect(() => {
-        if (context.result && context.result.timestamp - Date.now() < 60000) {
+        if (context.result && Date.now() - context.result.timestamp < 60000) {
             setResult(context.result.data);
         } else if (!isLoading && !error) {
             setIsLoading(true);
             (async () => {
                 try {
-                    const remoteResult = await dataFetch<IResult[]>(context.apiRoute + `/result/${id || ''}`);
+                    const remoteResult = await dataFetch<IResult[]>(context.apiRoute + `/result/`);
 
                     setIsLoading(false);
                     dispatch('result', {
@@ -134,14 +155,16 @@ export const useResultContext = (id?: number): TResultContext => {
                 }
             })();
         }
-    }, [context.apiRoute, context.result, dispatch, error, id, isLoading]);
+    }, [context.apiRoute, context.result, dispatch, error, isLoading]);
 
-    if (id) {
-        const hasResult = result?.find((b) => b.id === id);
+    if (ids) {
+        const hasResult = result.filter((b) => {
+            return ids.includes(b.id);
+        });
         if (hasResult) {
-            return { data: [hasResult], isLoading, error };
-        } else return { data: undefined, isLoading, error: new Error(`Business with id ${id} not found in the data`) };
+            return { data: hasResult, isLoading, error };
+        } else return { data: [], isLoading, error: new Error(`Business with ids not found in the data`) };
     } else {
-        return { data: result, isLoading, error };
+        return { data: [], isLoading, error };
     }
 };

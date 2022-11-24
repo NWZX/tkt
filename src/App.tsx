@@ -5,7 +5,7 @@ import BusinessDetail from './pages/BusinessDetail';
 import { Box, ChakraProvider } from '@chakra-ui/react';
 import Fonts from 'Font';
 import theme from './theme';
-import { DataContextProvider } from 'interface/DataContext';
+import { DataContextProvider } from 'context/DataContext';
 
 const App = (): JSX.Element => {
     return (

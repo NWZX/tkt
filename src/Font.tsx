@@ -6,7 +6,7 @@ const Fonts = (): JSX.Element => (
         @font-face {
             font-family: "AvenirR";
             src: local("AvenirR"),
-            url("/AvenirR.ttf") format("truetype");
+            url("/font/AvenirR.ttf") format("truetype");
             font-weight: bold;
         }
       `}
