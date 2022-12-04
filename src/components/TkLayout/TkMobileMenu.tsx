@@ -78,7 +78,7 @@ const TkMobileMenu: React.FC<Props> = ({ hiddenMenuButton }) => {
 
                     <DrawerFooter justifyContent={'left'}>
                         <Flex direction={'row'} gap={'0.5rem'} marginLeft={'1rem'}>
-                            <Avatar src="https://loremflickr.com/320/240/person" />
+                            <Avatar name="Sophe L" src="https://loremflickr.com/320/240/person" />
                             <Flex direction={'column'}>
                                 <Text>Sophie L.</Text>
                                 <Text>sophie.l@gmail.com</Text>

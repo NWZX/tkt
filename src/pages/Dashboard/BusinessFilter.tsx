@@ -15,6 +15,7 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
         <Flex direction={['column', 'row']} gap={'1rem'}>
             <TkSelect
                 placeholder="Sector *"
+                aria-label="Sector"
                 isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {
@@ -30,6 +31,7 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
             </TkSelect>
             <TkSelect
                 placeholder="Company *"
+                aria-label="Company"
                 isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {

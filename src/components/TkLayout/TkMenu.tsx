@@ -23,7 +23,7 @@ const TkMenu: React.FC<Props> = () => {
                 <TkMenuButton leftIcon={<ChatBubbleIcon />}>Help</TkMenuButton>
             </Flex>
             <Flex direction={'row'} mt={'auto'} gap={'0.5rem'}>
-                <Avatar src="https://loremflickr.com/320/240/person" />
+                <Avatar name="Sophe L" src="https://loremflickr.com/320/240/person" />
                 <Flex direction={'column'}>
                     <Text>Sophie L.</Text>
                     <Text>sophie.l@gmail.com</Text>
