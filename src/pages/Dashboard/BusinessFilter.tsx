@@ -18,7 +18,7 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
                 isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {
-                    e.target.value && setSector(e.target.value);
+                    setSector(e.target.value);
                     onChange && onChange(e.target.value, company);
                 }}
             >
@@ -33,7 +33,7 @@ const BusinessFilter: React.FC<Props> = ({ sectors, companies, onChange }) => {
                 isRequired
                 w={['100%', '100%', '30%']}
                 onChange={(e) => {
-                    e.target.value && setCompany(e.target.value);
+                    setCompany(e.target.value);
                     onChange && onChange(sector, e.target.value);
                 }}
             >
