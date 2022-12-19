@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import BusinessDetail from './pages/BusinessDetail';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import Fonts from 'Font';
 import theme from './theme';
 import { DataContextProvider } from 'context/DataContext';
@@ -12,12 +12,12 @@ const App = (): JSX.Element => {
         <DataContextProvider apiRoute="https://test.wertkt.com/api">
             <ChakraProvider theme={theme}>
                 <Fonts />
-                <Box h={'100vh'}>
+                <div className="h-screen">
                     <Routes>
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/business/:id" element={<BusinessDetail />} />
                     </Routes>
-                </Box>
+                </div>
             </ChakraProvider>
         </DataContextProvider>
     );

@@ -1,4 +1,3 @@
-import { List, Flex, Text, Box } from '@chakra-ui/react';
 import React from 'react';
 
 interface Props {
@@ -7,18 +6,18 @@ interface Props {
 
 const BusinessList: React.FC<Props> = ({ children }) => {
     return (
-        <Box>
-            <Box>
-                <Flex w={['100%']} h={'2.5rem'} justifyContent={'space-between'} color={'grey.main'}>
-                    <Text w={'33%'}>COMPANY</Text>
-                    <Text w={'33%'}>N° SIREN</Text>
-                    <Text w={'33%'}>CATEGORY</Text>
-                </Flex>
-            </Box>
-            <List spacing={3} overflowY={'auto'}>
+        <div>
+            <div>
+                <div className="flex w-full h-10 justify-between text-grey-main">
+                    <p className="w-1/3">COMPANY</p>
+                    <p className="w-1/3">N° SIREN</p>
+                    <p className="w-1/3">CATEGORY</p>
+                </div>
+            </div>
+            <ul role="list" className="m-0 p-0 list-none overflow-y-auto flex flex-col gap-3">
                 {children}
-            </List>
-        </Box>
+            </ul>
+        </div>
     );
 };
 

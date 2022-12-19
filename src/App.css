@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .tk-menu-button:hover svg {
   fill: #4E59FF;
 }

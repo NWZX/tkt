@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, IconButton, Skeleton, SkeletonText, Text } from '@chakra-ui/react';
+import { IconButton, Skeleton, SkeletonText } from '@chakra-ui/react';
 import BackIcon from 'icons/BackIcon';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,8 @@ const BusinessDetailHead: React.FC<Props> = ({ businessName, businessSiren }) =>
     const navigate = useNavigate();
 
     return (
-        <Flex direction={'row'} gap={'1rem'}>
-            <Box my="auto">
+        <div className="flex flex-row gap-4">
+            <div className="my-auto">
                 <IconButton
                     aria-label="Back"
                     mr={'5%'}
@@ -26,20 +26,18 @@ const BusinessDetailHead: React.FC<Props> = ({ businessName, businessSiren }) =>
                         navigate('/');
                     }}
                 />
-            </Box>
-            <Flex direction={'column'} gap={'1rem'}>
+            </div>
+            <div className="flex flex-col gap-4">
                 <Skeleton isLoaded={!!businessName} height={'32px'}>
-                    <Heading as={'h1'} size={'lg'}>
+                    <h1 className="text-4xl">
                         {businessName ? businessName : <SkeletonText noOfLines={1} spacing="15" />}
-                    </Heading>
+                    </h1>
                 </Skeleton>
                 <SkeletonText noOfLines={1} spacing="4" isLoaded={!!businessSiren}>
-                    <Text fontSize={'xs'} color={'grey.light'}>
-                        N° SIREN {businessSiren}
-                    </Text>
+                    <p className="text-xs text-grey-light">N° SIREN {businessSiren}</p>
                 </SkeletonText>
-            </Flex>
-        </Flex>
+            </div>
+        </div>
     );
 };
 

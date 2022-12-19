@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TkLayout from 'components/TkLayout';
@@ -36,7 +35,7 @@ const BusinessDetail: React.FC<Props> = () => {
             </Helmet>
             <TkLayout hiddenMenuButton={true}>
                 <BusinessDetailHead businessName={businessData?.name} businessSiren={businessData?.siren} />
-                <Flex direction={'row'} flexWrap={'wrap'} gap={'2rem'} marginTop={['3rem', '3rem', '0']}>
+                <div className="flex flex-row flex-wrap gap-8 mt-12 lg:mt-0">
                     <BarGraphCard
                         name="Chiffre d'affaire"
                         data={data.map((v) => {
@@ -61,7 +60,7 @@ const BusinessDetail: React.FC<Props> = () => {
                             return { ammount: v.margin, year: v.year };
                         })}
                     />
-                </Flex>
+                </div>
             </TkLayout>
         </>
     );

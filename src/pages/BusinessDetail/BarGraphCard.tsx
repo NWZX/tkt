@@ -1,4 +1,4 @@
-import { Card, CardHeader, Heading } from '@chakra-ui/react';
+import { Card, CardHeader } from '@chakra-ui/react';
 import React from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
@@ -14,7 +14,7 @@ const BarGraphCard: React.FC<Props> = ({ name, data }) => {
     return (
         <Card w={['100%', '100%', '45%']} h={'300px'}>
             <CardHeader>
-                <Heading size="md">{name}</Heading>
+                <h2 className="text-xl">{name}</h2>
             </CardHeader>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart

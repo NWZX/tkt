@@ -6,9 +6,7 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
-    Flex,
     IconButton,
-    Text,
     useDisclosure,
 } from '@chakra-ui/react';
 import BellIcon from 'icons/BellIcon';
@@ -32,7 +30,7 @@ const TkMobileMenu: React.FC<Props> = ({ hiddenMenuButton }) => {
 
     return (
         <>
-            <Flex direction={'row'} justifyContent="space-between">
+            <div className="flex flex-row justify-between">
                 <TKTLogo color="#4E59FF" width={'100px'} height={'33px'} />
                 <IconButton
                     display={hiddenMenuButton ? 'none' : 'inline-flex'}
@@ -46,12 +44,12 @@ const TkMobileMenu: React.FC<Props> = ({ hiddenMenuButton }) => {
                     color={'white'}
                     onClick={onOpen}
                 />
-            </Flex>
+            </div>
             <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef} size={'full'}>
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerHeader>
-                        <Flex direction={'row'} justifyContent="space-between">
+                        <div className="flex flex-row justify-between">
                             <TKTLogo color="#4E59FF" width={'100px'} height={'33px'} />
                             <IconButton
                                 ref={btnRef}
@@ -63,27 +61,27 @@ const TkMobileMenu: React.FC<Props> = ({ hiddenMenuButton }) => {
                                 color={'white'}
                                 onClick={onClose}
                             />
-                        </Flex>
+                        </div>
                     </DrawerHeader>
 
                     <DrawerBody>
-                        <Flex direction={'column'} mt={'2rem'}>
+                        <div className="flex flex-col mt-8">
                             <TkMenuButton leftIcon={<DashboardIcon />} onClick={() => navigate('/')}>
                                 Dashboard
                             </TkMenuButton>
                             <TkMenuButton leftIcon={<BellIcon />}>Notification</TkMenuButton>
                             <TkMenuButton leftIcon={<ChatBubbleIcon />}>Help</TkMenuButton>
-                        </Flex>
+                        </div>
                     </DrawerBody>
 
                     <DrawerFooter justifyContent={'left'}>
-                        <Flex direction={'row'} gap={'0.5rem'} marginLeft={'1rem'}>
+                        <div className="flex flex-row gap-2 ml-4">
                             <Avatar name="Sophe L" src="https://loremflickr.com/320/240/person" />
-                            <Flex direction={'column'}>
-                                <Text>Sophie L.</Text>
-                                <Text>sophie.l@gmail.com</Text>
-                            </Flex>
-                        </Flex>
+                            <div className="flex flex-col">
+                                <p>Sophie L.</p>
+                                <p>sophie.l@gmail.com</p>
+                            </div>
+                        </div>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>

@@ -1,4 +1,4 @@
-import { Avatar, Flex, Text } from '@chakra-ui/react';
+import { Avatar } from '@chakra-ui/react';
 import React from 'react';
 import TkMenuButton from './TkMenuButton';
 import DashboardIcon from 'icons/DashboardIcon';
@@ -13,23 +13,23 @@ const TkMenu: React.FC<Props> = () => {
     const navigate = useNavigate();
 
     return (
-        <Flex direction={'column'} h={'95%'}>
+        <div className="flex flex-col h-[95%]">
             <TKTLogo color="#4E59FF" width={'150px'} height={'50px'} />
-            <Flex direction={'column'} mt={'2rem'}>
+            <div className="flex flex-col mt-8">
                 <TkMenuButton leftIcon={<DashboardIcon />} onClick={() => navigate('/')}>
                     Dashboard
                 </TkMenuButton>
                 <TkMenuButton leftIcon={<BellIcon />}>Notification</TkMenuButton>
                 <TkMenuButton leftIcon={<ChatBubbleIcon />}>Help</TkMenuButton>
-            </Flex>
-            <Flex direction={'row'} mt={'auto'} gap={'0.5rem'}>
+            </div>
+            <div className="flex flex-row mt-auto gap-2">
                 <Avatar name="Sophe L" src="https://loremflickr.com/320/240/person" />
-                <Flex direction={'column'}>
-                    <Text>Sophie L.</Text>
-                    <Text>sophie.l@gmail.com</Text>
-                </Flex>
-            </Flex>
-        </Flex>
+                <div className="flex flex-col">
+                    <p>Sophie L.</p>
+                    <p>sophie.l@gmail.com</p>
+                </div>
+            </div>
+        </div>
     );
 };
 

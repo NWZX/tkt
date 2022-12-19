@@ -1,14 +1,18 @@
-import { Select, SelectProps } from '@chakra-ui/react';
-import React from 'react';
+import React, { SelectHTMLAttributes } from 'react';
+import clsx from 'clsx';
 
-interface Props extends SelectProps {}
+interface Props extends React.DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {}
 
 const TkSelect: React.FC<Props> = ({ ...props }) => {
     return (
-        <Select
+        <select
             {...props}
-            _hover={{ borderColor: 'blue.main' }}
-            _focusVisible={{ borderColor: 'blue.main', boxShadow: 'none' }}
+            className={clsx(
+                'py-2 px-2 rounded-lg border-2 border-grey-light',
+                'focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-main focus-visible:ring-opacity-100',
+                'bg-white',
+                props.className,
+            )}
         />
     );
 };

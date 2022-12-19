@@ -1,4 +1,4 @@
-import { Button, ListItem, Tag, Text } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IBusiness } from 'interface/Interfaces';
@@ -11,7 +11,7 @@ const BusinessListElement: React.FC<Props> = ({ id, name, siren, sector }) => {
     const navigate = useNavigate();
 
     return (
-        <ListItem
+        <li
             onClick={() => {
                 navigate(`/business/${id}`);
             }}
@@ -26,19 +26,13 @@ const BusinessListElement: React.FC<Props> = ({ id, name, siren, sector }) => {
                 borderColor={'grey.light'}
                 _hover={{ bgColor: 'grey.light', borderColor: 'blue.main' }}
             >
-                <Text as={'span'} w={'33%'} textAlign={'left'} whiteSpace={'pre-wrap'}>
-                    {name.toUpperCase()}
-                </Text>
-                <Text as={'span'} w={'33%'} textAlign={['center', 'left']}>
-                    {siren}
-                </Text>
-                <Text as={'span'} w={'33%'} textAlign={['center', 'left']}>
-                    <Tag size={'lg'} bgColor={'blue.main'} color={'white'} borderRadius={'3px'}>
-                        {sector}
-                    </Tag>
-                </Text>
+                <span className="w-1/3 text-left whitespace-pre-wrap">{name.toUpperCase()}</span>
+                <span className="w-1/3 text-center md:text-left">{siren}</span>
+                <span className="w-1/3 text-center md:text-left">
+                    <span className="px-4 py-2 bg-blue-main text-white rounded-md">{sector}</span>
+                </span>
             </Button>
-        </ListItem>
+        </li>
     );
 };
 

@@ -1,4 +1,4 @@
-import { Flex, Heading, ListItem, Spinner } from '@chakra-ui/react';
+import { ListItem, Spinner } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import TkLayout from 'components/TkLayout';
 import { IBusiness } from 'interface/Interfaces';
@@ -51,10 +51,8 @@ const Dashboard: React.FC<Props> = () => {
                 <link rel="canonical" href="http://localhost" />
             </Helmet>
             <TkLayout>
-                <Flex direction={'column'} gap={'3rem'}>
-                    <Heading as="h2" size={['md', 'md', 'lg']}>
-                        Welcome on TKT Dashboard!
-                    </Heading>
+                <div className="flex flex-col gap-12">
+                    <h2 className="text-2xl lg:text-3xl">Welcome on TKT Dashboard!</h2>
                     <BusinessFilter
                         sectors={sectorTag}
                         companies={companyTag}
@@ -71,7 +69,7 @@ const Dashboard: React.FC<Props> = () => {
                             })
                         )}
                     </BusinessList>
-                </Flex>
+                </div>
             </TkLayout>
         </>
     );

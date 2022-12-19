@@ -1,4 +1,3 @@
-import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
 import TkMenu from './TkMenu';
 import TkMobileMenu from './TkMobileMenu';
@@ -10,17 +9,15 @@ interface Props {
 
 const TkLayout: React.FC<Props> = ({ children, hiddenMenuButton }) => {
     return (
-        <Flex w={'100%'} h={'100%'} gap={['0%', '0%', '5%']} direction={['column', 'column', 'row']}>
-            <Box w={['25%']} display={['none', 'none', 'block']} px={'2%'} pt={'2%'} bg={'#F9F9F9'}>
+        <div className="flex w-full h-full gap-0 lg:gap-[5%] flex-col lg:flex-row">
+            <div className="w-1/4 px-[2%] pt-[2%] bg-grey-lightest hidden lg:block">
                 <TkMenu />
-            </Box>
-            <Box display={['block', 'block', 'none']} pt={'2%'}>
+            </div>
+            <div className="pt-[2%] block lg:hidden">
                 <TkMobileMenu hiddenMenuButton={hiddenMenuButton} />
-            </Box>
-            <Box w={['100%', '100%', '70%']} pr={['5%', '5%', '2%']} pl={['5%', '5%', '0%']} pt={'2%'}>
-                {children}
-            </Box>
-        </Flex>
+            </div>
+            <div className="w-full lg:w-[70%] pr-[5%] lg:pr-[2%] pl-[5%] lg:pl-0 pt-[2%]">{children}</div>
+        </div>
     );
 };
 

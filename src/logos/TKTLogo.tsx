@@ -1,8 +1,6 @@
-import { Icon, IconProps } from '@chakra-ui/react';
-
-const TKTLogo: React.FC<Omit<IconProps, 'color'> & { color?: string }> = ({ ...props }) => {
+const TKTLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) => {
     return (
-        <Icon width="280" height="140" viewBox="0 0 280 140" {...props}>
+        <svg width="280" height="140" viewBox="0 0 280 140" {...props}>
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -33,7 +31,7 @@ const TKTLogo: React.FC<Omit<IconProps, 'color'> & { color?: string }> = ({ ...p
                 d="M189.499 38.0509H160.595V67H189.499V38.0509ZM192.499 35.0509V70H157.595V35.0509H192.499Z"
                 fill={props.color}
             />
-        </Icon>
+        </svg>
     );
 };
 
